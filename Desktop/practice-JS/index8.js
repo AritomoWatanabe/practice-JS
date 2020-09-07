@@ -8,13 +8,12 @@ function addChatText(val, type) {
 	// チャットに追加するHTMLのタグを生成
 	var text = document.createElement('li');
 
-	// テキストを設定
+	// innerHTMLを使ってvalを書き換え
 	text.innerHTML = val;
 	// 赤文字のスタイルを設定（CSSのclass「message-other」を設定）
 	if(type === "other"){
 		text.classList.add("message-other");
 	}
-
 
 	// 追加対象となる要素を取得
 	var chatWindow = document.getElementById("chat-list");
@@ -22,29 +21,30 @@ function addChatText(val, type) {
 	chatWindow.appendChild(text);
 }
 
-	// 送信ボタンを押した時にメッセージを送信
-	document.getElementById("chat-send").addEventListener("click", function(){
-		var inputText = document.getElementById("chat-input");
+// 送信ボタンを押した時にメッセージを送信
+document.getElementById("chat-send").addEventListener("click", function(){
+
+	var inputText = document.getElementById("chat-input");
 
 	// addChatText関数を入力値とCSSのclass判別文字列を引数として実行
 	addChatText(inputText.value,"you");
+
 	// 入力欄を空欄にする
 	inputText.value = "";
-
-	});
-
-
-	// 8秒毎にメッセージを送信
-	setInterval(function(){
-		// ランダムの整数を設定
-		var index = Math.floor(Math.random() * answer.length);
-		// ランダムメッセージを表示
-		addChat
-		Text(answer[index], "other");
-	}, 8000);
+});
 
 
-	// 初回のみ1秒後にメッセージを自動送信
-	setTimeout(function(){
-		addChatText("こんにちは！","other");
-	}, 1000):
+// 8秒毎にメッセージを送信
+setInterval(function(){
+	// ランダムの整数を設定
+	var index = Math.floor(Math.random() * answer.length);
+	// ランダムメッセージを表示
+	addChatText(answer[index], "other");
+}, 8000);
+
+
+// 初回のみ1秒後にメッセージを自動送信
+setTimeout(function(){
+	addChatText("こんにちは！","other");
+}, 1000);
+
